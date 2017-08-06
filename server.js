@@ -6,7 +6,7 @@ var app = express();
 app.use(morgan('combined'));
 
 var articles = {
-    articleOne : {
+    'article-one' : {
       title: 'Article One | Srikanth',
       heading: 'Article One',
       date: '6th Aug 2017',
@@ -21,7 +21,7 @@ var articles = {
                     This is the content for my first Article.This is the content for my first Article.This is the content for my first Article.This is the content for my first Article.This is the content for my first Article.This is the content for my first Article.
                 </p>`
         },
-    articleTwo : {
+    'article-two' : {
       title: 'Article Two | Srikanth',
       heading: 'Article Two',
       date: '6th Aug 2017',
@@ -31,7 +31,7 @@ var articles = {
                 </p>`
                 
     },
-    articleThree : {
+    'article-three' : {
       title: 'Article Three | Srikanth',
       heading: 'Article Three',
       date: '6th Aug 2017',
@@ -91,17 +91,11 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-app.get('/article-one', function (req, res) {
-  res.send(createTemplate(articleOne));
+app.get('/:articleName', function (req, res) {
+  var articleName = req.params.articleName;
+  res.send(createTemplate(articles[articleName]));
 });
 
-app.get('/article-two', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
-});
-
-app.get('/article-three', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
-});
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
 
